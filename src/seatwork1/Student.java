@@ -4,7 +4,7 @@ public class Student {
 
     private String fullname;
     private double baon;
-
+    
     public Student(String fullname) {
         this.fullname = fullname;
     }
