@@ -1,8 +1,19 @@
 package week4;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Scanner;
+
 
 public class PickerUI extends javax.swing.JFrame {
-
+    
+    LinkedList words = new LinkedList();
+    LinkedList students = new LinkedList();
+    
+    String currentWord, currentStudent;
+    
     public PickerUI() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -17,10 +28,11 @@ public class PickerUI extends javax.swing.JFrame {
         jspKeywords = new javax.swing.JScrollPane();
         txtInstructions = new javax.swing.JTextArea();
         lblInstructions = new javax.swing.JLabel();
-        btnPickKeyword = new javax.swing.JButton();
+        btnLoad = new javax.swing.JButton();
         btnPickStudent = new javax.swing.JButton();
         txtStudent = new javax.swing.JLabel();
         txtKeyword = new javax.swing.JLabel();
+        btnPickKeyword = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pick Your Keyword");
@@ -44,16 +56,18 @@ public class PickerUI extends javax.swing.JFrame {
         lblInstructions.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         lblInstructions.setText("Click the buttons below to randomly generate keyword and student.");
 
-        btnPickKeyword.setFont(new java.awt.Font("Pristina", 0, 18)); // NOI18N
-        btnPickKeyword.setText("Pick a Keyword");
-        btnPickKeyword.addActionListener(new java.awt.event.ActionListener() {
+        btnLoad.setFont(new java.awt.Font("Poor Richard", 0, 18)); // NOI18N
+        btnLoad.setText("Load All");
+        btnLoad.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPickKeywordActionPerformed(evt);
+                btnLoadActionPerformed(evt);
             }
         });
 
-        btnPickStudent.setFont(new java.awt.Font("Pristina", 0, 18)); // NOI18N
+        btnPickStudent.setFont(new java.awt.Font("Poor Richard", 0, 18)); // NOI18N
         btnPickStudent.setText("Next Student");
+        btnPickStudent.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPickStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPickStudentActionPerformed(evt);
@@ -63,6 +77,15 @@ public class PickerUI extends javax.swing.JFrame {
         txtStudent.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
 
         txtKeyword.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
+
+        btnPickKeyword.setFont(new java.awt.Font("Poor Richard", 0, 18)); // NOI18N
+        btnPickKeyword.setText("Pick a Keyword");
+        btnPickKeyword.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPickKeyword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPickKeywordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -77,36 +100,38 @@ public class PickerUI extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jspKeywords)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(txtKeyword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
                         .addComponent(btnPickKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtKeyword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPickStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
-                .addGap(58, 58, 58))
+                        .addGap(66, 66, 66)
+                        .addComponent(btnPickStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(19, 19, 19)
                 .addComponent(lblInstructions)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jspKeywords, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jspKeywords, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPickStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPickKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                    .addComponent(btnPickKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,15 +148,28 @@ public class PickerUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPickKeywordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPickKeywordActionPerformed
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         // TODO add your handling code here:
-        txtKeyword.setText("Next Keyword");
-    }//GEN-LAST:event_btnPickKeywordActionPerformed
+        words.clear();
+        students.clear();
+        loadFile("words.txt", words);
+        loadFile("students.txt", students);
+        btnLoad.setEnabled(false);
+    }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnPickStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPickStudentActionPerformed
         // TODO add your handling code here:
         txtStudent.setText("Next Student");
+        Collections.shuffle(students);
+        currentWord = students.get(0).toString();
     }//GEN-LAST:event_btnPickStudentActionPerformed
+
+    private void btnPickKeywordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPickKeywordActionPerformed
+        // TODO add your handling code here:
+        txtKeyword.setText("Next Keyword");
+        Collections.shuffle(words);
+        currentWord = words.get(0).toString();
+    }//GEN-LAST:event_btnPickKeywordActionPerformed
 
  
     public static void main(String args[]) {
@@ -144,6 +182,7 @@ public class PickerUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnPickKeyword;
     private javax.swing.JButton btnPickStudent;
     private javax.swing.JPanel jPanel1;
@@ -153,4 +192,25 @@ public class PickerUI extends javax.swing.JFrame {
     private javax.swing.JLabel txtKeyword;
     private javax.swing.JLabel txtStudent;
     // End of variables declaration//GEN-END:variables
+
+    private void loadFile(String filename, LinkedList list) {
+        try {
+            File file = new File(filename); // file path
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                list.add(line);
+            }
+
+            scanner.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+        
+        for (Object word : list) {
+            System.out.println(word.toString());
+        }
+    }
 }
