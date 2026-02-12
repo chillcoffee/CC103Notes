@@ -6,6 +6,7 @@ public class Student {
     private int subjects;
     private float tuition;
     
-    //constructor, setter, getter, 2 calcTuition methods
+    //constructor, setter, getter, 
+    //2 calcTuition methods
 
 }
