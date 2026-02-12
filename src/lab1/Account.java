@@ -16,8 +16,19 @@ public class Account {
         this.pin = pin;
     }
     
+    
     public static void main(String[] args) {
         System.out.println("test");
+    }
+    
+    public void withdraw(float withdrawAmount){
+        if (this.getBalance() - withdrawAmount < 0) {
+            System.out.println("Withdrawal unsuccessful. Insufficient funds.");
+        } else {
+            this.setBalance(this.getBalance() - withdrawAmount);
+            System.out.println("Withdrawal successful");
+            System.out.println("New Balance: " + this.getBalance());
+        }
     }
 
     public void setLastname(String lastname) {
