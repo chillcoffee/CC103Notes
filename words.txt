@@ -2,3 +2,39 @@ method
 class
 object
 datatype
+returntype
+method header
+public
+private
+protected
+method body
+method call
+identifier
+parameter
+argument
+return statement
+void
+constructor
+instantiation
+float
+int
+long
+double
+String
+char
+boolean
+if
+for
+code block
+attributes
+UML
+type casting
+syntax
+method overloading
+access modifier
+setter
+getter
+Alt + Shift + F
+Shift + F6
+Alt + Insert
+

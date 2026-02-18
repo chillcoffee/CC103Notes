@@ -62,7 +62,14 @@ public class ATM {
 
         //#8
         System.out.println("\nWithdraw 6000");
-        acc1.withdraw(6000);
+        int withdrawAmount = 6000;
+        if (acc1.getBalance() - withdrawAmount < 0) {
+            System.out.println("Withdrawal unsuccessful. Insufficient funds.");
+        } else {
+            acc1.setBalance(acc1.getBalance() - withdrawAmount);
+            System.out.println("Withdrawal successful");
+            System.out.println("New Balance: " + acc1.getBalance());
+        }
 
         //#9
         System.out.println("\nWithdraw 2000 instead.");
@@ -72,10 +79,8 @@ public class ATM {
         //#10
         System.out.println("\n========Final Account Details========");        
         System.out.println("Account Number: " +acc1.getAccountNo());
-        System.out.println("Account PIN: +acc.getPin())");
+        System.out.println("Account PIN: "+acc1.getPin());
         System.out.println("Account Name: " + acc1.getFirstname() + " " + acc1.getMi() + ". " + acc1.getLastname());
         System.out.println("Balance: " + acc1.getBalance());        
     }
-    
-    
 }
