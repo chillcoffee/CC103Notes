@@ -33,7 +33,7 @@ public class Store {
         this.sales = sales;
     }
     
-    //method
+    //static method
     public static float sell(float price, float bayad){
         float sukli = bayad - price;
         return sukli;
@@ -48,7 +48,7 @@ public class Store {
         //obj.methodName
         Store mall = new Store("Aling Lourdes");
         mall.purchase(500, 100);
-        sell(25,50);
+        sell(25,50);    //static methods can be called from main without using object if within the same class
         System.out.println("Eto yung main ng Store class.");
     }
 }
