@@ -37,10 +37,20 @@ public class Pastil {
         return change;
     }
     
+    public void addTwoNumbers(int n1, int n2){
+        int total = n1 + n2;
+        System.out.println("Total"+total);
+    }
+    
     //sell method with params: price, payment, quantity
     public float sell(float price, float payment, int quantity){
         float change = payment - (price * quantity);
         this.setSales(this.getSales() + (price * quantity));
         return change;
+    }
+    
+    public boolean isValid(){
+        //condition
+        return true;
     }
 }

@@ -15,8 +15,8 @@ public class Student {
         this.tuition = tuition;
     }
 
-    public float calculateTuition(int subjects){
-        float totalTuition = (float) subjects * 1200;
+    public double calculateTuition(int subjects){
+        double totalTuition = (double) subjects * 1200;
         return totalTuition;
     }
     //another overlaoded calculateTution here
