@@ -163,7 +163,7 @@ public class PickerUI extends javax.swing.JFrame {
         words.clear();
         students.clear();
         loadFile("words.txt", words);
-        loadFile("ist.txt", students);
+        loadFile("sm.txt", students);
         System.out.println(students.size());
         System.out.println(words.size());
         btnLoad.setEnabled(false);

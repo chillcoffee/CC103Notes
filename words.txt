@@ -37,4 +37,4 @@ getter
 Alt + Shift + F
 Shift + F6
 Alt + Insert
-
+static method
