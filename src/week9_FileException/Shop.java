@@ -34,15 +34,15 @@ public class Shop implements FileHandler {
     public void writeFile(String filename, ArrayList<String> record) {
         String path = System.getProperty("user.dir");
         filename = "\\src\\" + packageName + "\\" + filename;
-        try{
-            FileWriter writer = new FileWriter(path+filename);
-            
-            for(String r: record){
-                writer.write(r);
+        try {
+            FileWriter writer = new FileWriter(path + filename);
+
+            for (String r : record) {
+                writer.write(r+"\n");
             }
             writer.close();
             System.out.println("Sales record saved.");
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println("File not found.");
         }
 
@@ -51,14 +51,19 @@ public class Shop implements FileHandler {
     public static void main(String[] args) {
         Shop sh = new Shop();
         sh.readFile("items.txt");
-        sh.showMenu();
-        sh.calculatePayment(sh.acceptOrder());
-        
+        sh.setPrices();
+        for (int i = 0; i < 3; i++) {
+            sh.showMenu();
+            sh.calculatePayment(sh.acceptOrder());
+        }        
+    }
+    
+    public void setPrices(){
+        ItemManager mgr = new ItemManager();
+        mgr.setPriceForAll(allProd);
     }
 
     public void showMenu() {
-        ItemManager mgr = new ItemManager();
-        mgr.setPriceForAll(allProd);
         System.out.println("\nWelcome to My Shop");
         int ctr = 1;
         for (Product p : allProd) {
@@ -86,14 +91,13 @@ public class Shop implements FileHandler {
         double change = received - chosenItem.getPrice();
         System.out.println("Change: " + change);
         System.out.println("Thank you. Come again.");
-        
-        recordSales(chosenItem, 1);
-        writeFile("sales.txt", salesRecord);
+
+        addRecord(chosenItem, 1);            
     }
 
-    public void recordSales(Product chosenItem, int quantity) {
-        salesRecord.add(chosenItem.getProductName()+"\t| "+format(chosenItem.getPrice())+"\t|"+quantity);
-        
+    public void addRecord(Product chosenItem, int quantity) {
+        salesRecord.add(chosenItem.getProductName() + "\t| " + format(chosenItem.getPrice()) + "\t|" + quantity);
+        writeFile("sales.txt", salesRecord);
     }
 
 }
