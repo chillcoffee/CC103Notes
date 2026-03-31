@@ -1,5 +1,6 @@
 package week4;
 
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collections;
@@ -7,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 
-public class PickerUI extends javax.swing.JFrame {
+public class PickerUI extends javax.swing.JFrame implements MouseListener, ActionListener{
     
     LinkedList words = new LinkedList();
     LinkedList students = new LinkedList();
@@ -42,6 +43,11 @@ public class PickerUI extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel1MouseExited(evt);
+            }
+        });
 
         lblInstructions.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         lblInstructions.setText("Click the buttons below to randomly generate keyword and student.");
@@ -197,6 +203,11 @@ public class PickerUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnPickKeywordActionPerformed
 
+    private void jPanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseExited
+        // TODO add your handling code here:
+        System.out.println("Bawal mag alt tab.");
+    }//GEN-LAST:event_jPanel1MouseExited
+
  
     public static void main(String args[]) {
 
@@ -239,4 +250,36 @@ public class PickerUI extends javax.swing.JFrame {
             System.out.println(word.toString());
         }
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        System.out.println("Bawal mag alt+tab.");
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+   
 }
