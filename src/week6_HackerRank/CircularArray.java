@@ -1,11 +1,18 @@
 package week6_HackerRank;
 
+import java.util.LinkedList;
+
 public class CircularArray {
 
     public static void main(String[] args) {
-        int[] original = {3, 2, 1};
+        int[] original = {45, 20, 36, 12, 52, 56};
+//          int[] original = {3, 2, 1}; int 
+        LinkedList<Integer> list = new LinkedList<Integer>();
+        list.add(3);
+        list.add(2);
+             
         
-        for (int k = 0; k < 2; k++) {         
+        for (int k = 0; k < 10; k++) {         
             int[] newArray = rotate(original); //method call to rotate k times
             
             //copy newArray to original;
@@ -40,3 +47,4 @@ public class CircularArray {
         System.out.println("");
     }
 }
+
